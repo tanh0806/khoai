@@ -1,0 +1,9 @@
+KHOAI - FE FIX
+
+1. Sao luu 3 file cu: index.html, app.js, style.css.
+2. Chep de 3 file trong goi nay vao thu muc goc KhoAI_Chatbot_final.
+3. Backend phai dang chay tai http://127.0.0.1:5000.
+4. Mo frontend: http://127.0.0.1:5500/index.html
+5. Bam Ctrl+F5 mot lan de xoa cache JS cu.
+
+Loi chinh da sua: app.js cu con tham chieu registerView/registerLink/backLogin1/backLogin2/regRole/registerForm trong khi index.html da bo dang ky, lam JavaScript dung ngay khi load. Ban app.js nay dong bo dung voi index.html va cac API co user_id.

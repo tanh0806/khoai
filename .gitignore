@@ -8,3 +8,12 @@
 *.py[cod]
 # Local vector database
 backend/my_vector_db/
+# Secrets and local environment
+.env
+**/.env
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+my_vector_db/

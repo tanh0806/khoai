@@ -1,0 +1,33 @@
+
+   cd backend
+   python -m venv venv
+   venv\Scripts\activate
+   pip install -r requirements.txt
+   python app.py
+
+4) LẦN ĐẦU, Terminal sẽ hiện:
+   GEMINI_API_KEY:
+
+   Dán API key Gemini của bạn rồi Enter.
+   (Khi dán có thể không thấy ký tự hiện ra vì Terminal đang ẩn key - đây là bình thường.)
+
+5) Khi thấy:
+   KHOAI GEMINI BACKEND ĐANG CHẠY
+   Địa chỉ: http://127.0.0.1:5000
+
+   -> KHÔNG đóng Terminal.
+
+6) Mở index.html bằng Live Server.
+7) Đăng nhập Quản lý:
+   manager@khoai.vn
+   123456
+8) Vào "Báo cáo kho & Trợ lý AI" và hỏi thử:
+   - Gợi ý nhập HH001
+   - Lập báo cáo nhập xuất tồn tháng này
+   - Tóm tắt biến động tồn kho bất thường
+
+LƯU Ý:
+- Frontend đã được nối sẵn với backend Gemini. KHÔNG cần sửa app.js.
+- backend/app.py đã có sẵn. KHÔNG cần tự tạo.
+- API key được lưu ở backend/.env, không nằm trong HTML/JavaScript.
+- Muốn đổi API key: xóa backend/.env rồi chạy lại python app.py.

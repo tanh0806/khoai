@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KhoAI - Quản lý kho + Gemini</title>
+<link rel="stylesheet" href="style.css?v=20261028-1">
+</head>
+<body>
+<section id="auth" class="auth">
+  <div class="auth-hero">
+    <div class="hero-logo">K</div>
+    <div class="hero-kicker">SMART WAREHOUSE × AI</div>
+    <h1>Hệ thống quản lý kho<br>tích hợp Trí tuệ nhân tạo</h1>
+    <p>Quản lý hàng hóa, danh mục, kho, nhà cung cấp, nhập – xuất, chuyển kho, lô hàng, tồn kho, báo cáo và trợ lý Gemini AI.</p>
+    <div class="hero-features">
+      <div><b>📦 Quản lý kho</b><span>Dữ liệu MySQL trực tiếp</span></div>
+      <div><b>🔐 Phân quyền</b><span>Admin · Thủ kho · Kế toán</span></div>
+      <div><b>✦ Gemini AI</b><span>Hỏi tự nhiên trên dữ liệu kho</span></div>
+    </div>
+  </div>
+
+  <div class="auth-panel"><div class="login">
+    <div id="loginView">
+      <h1>Đăng nhập</h1>
+      <p class="muted">Chào mừng bạn quay lại KhoAI.</p>
+      <form id="loginForm" class="auth-form">
+        <label>Vai trò</label>
+        <select id="role"><option>Admin</option><option>Thủ kho</option><option>Kế toán</option></select>
+        <label>Email</label><input id="email" type="email" value="admin@khoai.vn" required>
+        <label>Mật khẩu</label><input id="password" type="password" value="123456" required>
+        <div class="auth-row"><span></span><button id="forgotLink" class="link-btn" type="button">Quên mật khẩu?</button></div>
+        <p id="loginError" class="error"></p>
+        <button class="primary full">Đăng nhập</button>
+      </form>
+    </div>
+
+    <div id="forgotView" class="hidden">
+      <h1>Quên mật khẩu</h1>
+      <p class="muted">Luồng phục hồi dành cho bản demo đồ án.</p>
+      <form id="forgotForm" class="auth-form">
+        <label>Email</label><input id="forgotEmail" type="email" required>
+        <label>Mật khẩu mới</label><input id="newPassword" type="password" minlength="6" required>
+        <label>Nhập lại mật khẩu</label><input id="newPassword2" type="password" minlength="6" required>
+        <p id="forgotError" class="error"></p>
+        <button class="primary full">Đổi mật khẩu</button>
+      </form>
+      <p class="auth-switch">Đã có tài khoản? <button id="backLogin" class="link-btn" type="button">Đăng nhập</button></p>
+    </div>
+  </div></div>
+</section>
+
+<div id="app" class="app hidden">
+  <aside class="side">
+    <div class="brand">K KhoAI<small>Warehouse × AI × MySQL</small></div>
+    <nav id="nav">
+      <button class="nav active" data-page="overview">▦ Tổng quan</button>
+      <button class="nav" data-page="products">📦 Hàng hóa</button>
+      <button class="nav" data-page="categories">🗂 Danh mục</button>
+      <button class="nav" data-page="warehouses">🏭 Kho</button>
+      <button class="nav" data-page="suppliers">🚚 Nhà cung cấp</button>
+      <button class="nav" data-page="transactions">⇄ Nhập / Xuất</button>
+      <button class="nav" data-page="transfers">🔁 Chuyển kho</button>
+      <button class="nav" data-page="lots">🧾 Lô hàng</button>
+      <button class="nav" data-page="inventory">▥ Tồn kho</button>
+      <button class="nav" data-page="scanner">▣ Quét / tra mã</button>
+      <button class="nav" data-page="alerts">⚠ Cảnh báo</button>
+      <button class="nav" data-page="reports">📊 Báo cáo</button>
+      <button class="nav" data-page="ai">🤖 AI dự báo</button>
+      <button class="nav" data-page="accounts">👥 Cấp mật khẩu</button>
+      <button class="nav" data-page="audit">🔐 Nhật ký</button>
+      <button class="nav" data-page="profile">👤 Hồ sơ</button>
+    </nav>
+    <button id="logout" class="secondary logout">Đăng xuất</button>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <b>Hệ thống quản lý kho</b>
+      <div id="userAvatar" class="avatar" title="Hồ sơ cá nhân">A</div>
+    </header>
+    <div class="content">
+
+      <section id="page-overview" class="page active">
+        <div class="heading"><div><h1>Tổng quan</h1><p class="muted">Dữ liệu lấy trực tiếp từ MySQL.</p></div><button id="refresh" class="secondary">↻ Làm mới</button></div>
+        <div class="cards">
+          <div class="card">📦<b id="sProducts">0</b><span>Mặt hàng</span></div>
+          <div class="card">🏭<b id="sStock">0</b><span>Tổng tồn</span></div>
+          <div class="card">⚠️<b id="sLow">0</b><span>Sắp hết</span></div>
+          <div class="card">💰<b id="sValue">0 ₫</b><span>Giá trị tồn</span></div>
+        </div>
+        <div class="panel"><h3>Nhập / xuất 7 ngày</h3><div id="chart" class="chart"></div><div class="legend">🔵 Nhập &nbsp; 🟠 Xuất</div></div>
+      </section>
+
+      <section id="page-products" class="page">
+        <div class="heading"><div><h1>Hàng hóa</h1><p class="muted">Quản lý mã hàng, danh mục, mã vạch, giá và tồn tối thiểu.</p></div><button id="showProductForm" class="primary warehouse-op">+ Thêm hàng</button></div>
+        <div id="productFormBox" class="panel hidden">
+          <form id="productForm" class="form grid-form">
+            <input id="pCode" placeholder="Mã hàng" required>
+            <input id="pName" placeholder="Tên hàng" required>
+            <select id="pCategory"><option value="">-- Danh mục --</option></select>
+            <input id="pUnit" placeholder="ĐVT" value="Cái">
+            <input id="pPrice" type="number" min="0" placeholder="Giá nhập" required>
+            <input id="pSale" type="number" min="0" placeholder="Giá bán">
+            <input id="pMin" type="number" min="0" value="10" placeholder="Tồn tối thiểu">
+            <input id="pBarcode" placeholder="Mã vạch / QR">
+            <input id="pDescription" placeholder="Mô tả">
+            <button class="primary">Lưu hàng hóa</button>
+          </form>
+        </div>
+        <div class="table"><table><thead><tr><th>Mã</th><th>Tên</th><th>Danh mục</th><th>ĐVT</th><th>Giá nhập</th><th>Giá bán</th><th>Tồn tối thiểu</th><th>Mã vạch</th><th>Trạng thái</th></tr></thead><tbody id="productRows"></tbody></table></div>
+      </section>
+
+      <section id="page-categories" class="page">
+        <div class="heading"><div><h1>Danh mục</h1><p class="muted">Phân loại hàng hóa.</p></div></div>
+        <form id="categoryForm" class="panel form inline-form admin-op"><input id="cCode" placeholder="Mã danh mục" required><input id="cName" placeholder="Tên danh mục" required><input id="cDescription" placeholder="Mô tả"><button class="primary">Thêm danh mục</button></form>
+        <div class="table gap-top"><table><thead><tr><th>Mã</th><th>Tên</th><th>Mô tả</th></tr></thead><tbody id="categoryRows"></tbody></table></div>
+      </section>
+
+      <section id="page-warehouses" class="page">
+        <div class="heading"><div><h1>Kho</h1><p class="muted">Danh sách kho trong hệ thống.</p></div></div>
+        <form id="warehouseForm" class="panel form inline-form admin-op"><input id="wCode" placeholder="Mã kho" required><input id="wName" placeholder="Tên kho" required><input id="wAddress" placeholder="Địa chỉ"><button class="primary">Thêm kho</button></form>
+        <div class="table gap-top"><table><thead><tr><th>Mã</th><th>Tên kho</th><th>Địa chỉ</th><th>Trạng thái</th></tr></thead><tbody id="warehouseRows"></tbody></table></div>
+      </section>
+
+      <section id="page-suppliers" class="page">
+        <div class="heading"><div><h1>Nhà cung cấp</h1><p class="muted">Thông tin đối tác cung cấp hàng hóa.</p></div></div>
+        <form id="supplierForm" class="panel form grid-form admin-op"><input id="sCode" placeholder="Mã NCC" required><input id="sName" placeholder="Tên NCC" required><input id="sPhone" placeholder="Điện thoại"><input id="sEmail" placeholder="Email"><input id="sAddress" placeholder="Địa chỉ"><button class="primary">Thêm nhà cung cấp</button></form>
+        <div class="table gap-top"><table><thead><tr><th>Mã</th><th>Tên</th><th>Điện thoại</th><th>Email</th><th>Địa chỉ</th></tr></thead><tbody id="supplierRows"></tbody></table></div>
+      </section>
+
+      <section id="page-transactions" class="page">
+        <div class="heading"><div><h1>Nhập / Xuất</h1><p class="muted">Thủ kho được tạo và tự xác nhận phiếu thuộc kho mình. Kế toán chỉ xem.</p></div></div>
+        <div class="grid2">
+          <form id="txForm" class="panel form warehouse-op"><h3>Tạo phiếu</h3><select id="txType"><option>Nhập</option><option>Xuất</option></select><select id="txWarehouse"></select><select id="txProduct"></select><select id="txSupplier"><option value="">-- Không chọn NCC --</option></select><input id="txQty" type="number" min="1" value="1" required><input id="txPrice" type="number" min="0" value="0"><textarea id="txNote" placeholder="Ghi chú"></textarea><button class="primary">Tạo phiếu chờ xác nhận</button></form>
+          <div class="panel"><h3>Nguyên tắc</h3><p class="muted">Tạo phiếu chưa làm đổi tồn. Chỉ khi xác nhận mới cập nhật tồn. Xuất kho bị chặn nếu vượt tồn thực tế.</p></div>
+        </div>
+        <div class="table gap-top"><table><thead><tr><th>#</th><th>Loại</th><th>Kho</th><th>Hàng</th><th>SL</th><th>Giá</th><th>Trạng thái</th><th>Người xác nhận</th><th>Thao tác</th></tr></thead><tbody id="txRows"></tbody></table></div>
+      </section>
+
+      <section id="page-transfers" class="page">
+        <div class="heading"><div><h1>Chuyển kho</h1><p class="muted">Chuyển hàng giữa các kho theo cơ chế chờ xác nhận.</p></div></div>
+        <form id="transferForm" class="panel form grid-form warehouse-op"><select id="trFrom"></select><select id="trTo"></select><select id="trProduct"></select><input id="trQty" type="number" min="1" value="1" required><input id="trNote" placeholder="Ghi chú"><button class="primary">Tạo phiếu chuyển</button></form>
+        <div class="table gap-top"><table><thead><tr><th>#</th><th>Từ kho</th><th>Đến kho</th><th>Hàng</th><th>SL</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody id="transferRows"></tbody></table></div>
+      </section>
+
+      <section id="page-lots" class="page">
+        <div class="heading"><div><h1>Lô hàng</h1><p class="muted">Theo dõi mã lô và hạn sử dụng.</p></div></div>
+        <form id="lotForm" class="panel form grid-form warehouse-op"><input id="lotCode" placeholder="Mã lô" required><select id="lotWarehouse"></select><select id="lotProduct"></select><input id="lotQty" type="number" min="0" value="0" required><label>Ngày nhập<input id="lotReceived" type="date"></label><label>Hạn dùng<input id="lotExpiry" type="date"></label><button class="primary">Thêm lô</button></form>
+        <div class="table gap-top"><table><thead><tr><th>Mã lô</th><th>Kho</th><th>Hàng</th><th>SL theo lô</th><th>Ngày nhập</th><th>Hạn dùng</th><th>Trạng thái</th></tr></thead><tbody id="lotRows"></tbody></table></div>
+      </section>
+
+      <section id="page-inventory" class="page">
+        <div class="heading"><div><h1>Tồn kho</h1><p class="muted">C01 đảm bảo số lượng không bao giờ âm.</p></div></div>
+        <div class="table"><table><thead><tr><th>Kho</th><th>Mã</th><th>Hàng hóa</th><th>Tồn</th><th>Tồn tối thiểu</th><th>Giá trị</th></tr></thead><tbody id="inventoryRows"></tbody></table></div>
+      </section>
+
+      <section id="page-scanner" class="page">
+        <div class="heading"><div><h1>Quét / tra mã</h1><p class="muted">Nhập mã hàng, mã vạch hoặc từ khóa tên hàng.</p></div></div>
+        <form id="scanForm" class="panel composer mini"><input id="scanInput" placeholder="Ví dụ: HH001 hoặc mã vạch" required><button class="primary">Tra cứu</button></form>
+        <div id="scanResult" class="panel gap-top muted">Chưa có kết quả.</div>
+      </section>
+
+      <section id="page-alerts" class="page">
+        <div class="heading"><div><h1>Cảnh báo</h1><p class="muted">Hàng sắp hết, hết hàng và lô sắp hết hạn.</p></div><button id="reloadAlerts" class="secondary">↻ Làm mới</button></div>
+        <div class="table"><table><thead><tr><th>Mức</th><th>Loại</th><th>Đối tượng</th><th>Chi tiết</th></tr></thead><tbody id="alertRows"></tbody></table></div>
+      </section>
+
+      <section id="page-reports" class="page">
+        <div class="heading"><div><h1>Báo cáo kế toán</h1><p class="muted">Chỉ tổng hợp giao dịch đã xác nhận.</p></div><button id="reloadReports" class="secondary">↻ Làm mới</button></div>
+        <div class="cards">
+          <div class="card"><span>Giá trị tồn</span><b id="rValue">0 ₫</b></div>
+          <div class="card"><span>Giá trị nhập</span><b id="rImport">0 ₫</b></div>
+          <div class="card"><span>Giá trị xuất</span><b id="rExport">0 ₫</b></div>
+          <div class="card"><span>Phiếu xác nhận</span><b id="rConfirmed">0</b></div>
+        </div>
+        <div class="grid2">
+          <div class="panel"><h3>Nhập / xuất theo tháng</h3><div id="monthlyReport" class="simple-list"></div></div>
+          <div class="panel"><h3>Nhà cung cấp</h3><div id="supplierReport" class="simple-list"></div></div>
+        </div>
+      </section>
+
+      <section id="page-ai" class="page">
+        <div class="heading"><div><h1>KhoAI + Gemini</h1><p class="muted">Có thể hỏi tự nhiên về hàng hóa, tồn kho, nhập/xuất, lô, chuyển kho, nhà cung cấp, báo cáo và cảnh báo theo quyền hiện tại.</p></div></div>
+        <div class="suggestions" id="aiSuggestions"></div>
+        <div class="chat">
+          <div class="chat-head">✦ Trợ lý KhoAI</div>
+          <div id="messages" class="messages"><div class="msg ai">Xin chào! Bạn có thể hỏi tôi nhiều dạng câu hỏi về dữ liệu kho. Hãy thử một gợi ý ở phía trên.</div></div>
+          <form id="chatForm" class="composer"><textarea id="chatInput" rows="2" placeholder="Ví dụ: Mặt hàng nào sắp hết và nên nhập thêm bao nhiêu?"></textarea><button class="primary">Gửi</button></form>
+        </div>
+      </section>
+
+      <section id="page-accounts" class="page">
+        <div class="heading"><div><h1>Cấp mật khẩu tài khoản</h1><p class="muted">Chỉ Admin được cấp lại mật khẩu cho Thủ kho và Kế toán.</p></div></div>
+        <div class="grid2">
+          <form id="adminPasswordForm" class="panel form"><h3>Cấp / đổi mật khẩu</h3><label>Tài khoản</label><select id="adminAccount" required></select><label>Mật khẩu mới</label><input id="adminNewPassword" type="password" minlength="6" required><label>Nhập lại mật khẩu</label><input id="adminNewPassword2" type="password" minlength="6" required><button class="primary">Cấp mật khẩu</button></form>
+          <div class="panel"><h3>Quy tắc</h3><p class="muted">Mật khẩu được hash trước khi lưu. Nhật ký chỉ ghi hành động, không ghi mật khẩu.</p></div>
+        </div>
+        <div class="table gap-top"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Kho phụ trách</th><th>Trạng thái</th></tr></thead><tbody id="accountRows"></tbody></table></div>
+      </section>
+
+      <section id="page-audit" class="page">
+        <div class="heading"><div><h1>Nhật ký</h1><p class="muted">Người thực hiện, thời gian, hành động, đối tượng và chi tiết.</p></div></div>
+        <div class="table"><table><thead><tr><th>Thời gian</th><th>Người dùng</th><th>Hành động</th><th>Đối tượng</th><th>Chi tiết</th></tr></thead><tbody id="auditRows"></tbody></table></div>
+      </section>
+
+      <section id="page-profile" class="page">
+        <div class="heading"><div><h1>Hồ sơ cá nhân</h1><p class="muted">Thông tin tài khoản đang đăng nhập.</p></div></div>
+        <div id="profileBox" class="panel"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="app.js?v=20261028-1"></script>
+</body>
+</html>

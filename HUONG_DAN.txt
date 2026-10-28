@@ -1,0 +1,19 @@
+KHOAI - APP.PY + RAG.PY TỐI ƯU TỐC ĐỘ
+
+1. Thay backend/app.py bằng app.py mới.
+2. Thay backend/rag.py bằng rag.py mới.
+3. Giữ nguyên backend/.env, ingest.py, knowledge/ và my_vector_db/.
+4. Kiểm tra:
+   python -m py_compile app.py
+   python -m py_compile rag.py
+5. Chạy:
+   python app.py
+
+Tối ưu chính:
+- Câu đơn giản trả trực tiếp từ MySQL/RULES, không gọi Gemini.
+- RAG chỉ lấy 3 đoạn và cache 256 câu.
+- Lịch sử gửi Gemini giảm còn 6 lượt.
+- Payload MySQL giới hạn số bản ghi.
+- Gemini max_output_tokens giảm còn 800.
+- Bỏ retry sleep 2s + 4s khi Gemini lỗi.
+- Sửa confirm_tx để xuất kho không INSERT số âm, tránh ck_inventory_nonnegative.
