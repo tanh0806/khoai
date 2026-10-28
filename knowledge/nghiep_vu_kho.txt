@@ -1,0 +1,113 @@
+HỆ THỐNG QUẢN LÝ KHO KHOAI
+
+KhoAI là hệ thống quản lý kho có tích hợp trí tuệ nhân tạo.
+
+Các chức năng chính:
+- Quản lý hàng hóa
+- Quản lý danh mục
+- Quản lý kho
+- Quản lý nhà cung cấp
+- Nhập kho
+- Xuất kho
+- Chuyển kho
+- Quản lý lô hàng
+- Theo dõi tồn kho
+- Cảnh báo
+- Báo cáo
+- Quản lý tài khoản
+- Nhật ký hệ thống
+- Trợ lý AI
+
+
+NGHIỆP VỤ NHẬP KHO
+
+Admin và Thủ kho có thể tạo phiếu nhập.
+
+Khi phiếu nhập mới được tạo:
+- Trạng thái là Chờ xác nhận.
+- Tồn kho chưa thay đổi.
+
+Khi phiếu nhập được xác nhận:
+- Trạng thái chuyển thành Đã xác nhận.
+- Số lượng tồn kho tăng.
+- Ghi nhận người xác nhận.
+- Ghi nhận thời gian xác nhận.
+- Ghi nhật ký thao tác.
+
+Phiếu đã xác nhận không được xác nhận lại.
+
+
+NGHIỆP VỤ XUẤT KHO
+
+Admin và Thủ kho có thể tạo phiếu xuất.
+
+Khi tạo phiếu xuất:
+- Trạng thái là Chờ xác nhận.
+- Tồn kho chưa thay đổi.
+
+Khi xác nhận phiếu xuất:
+- Hệ thống kiểm tra số lượng tồn hiện tại.
+- Nếu số lượng xuất lớn hơn tồn hiện tại thì từ chối.
+- Nếu đủ hàng thì tồn kho giảm.
+- Phiếu chuyển sang trạng thái Đã xác nhận.
+- Hệ thống ghi nhật ký.
+
+
+NGHIỆP VỤ CHUYỂN KHO
+
+Phiếu chuyển kho gồm:
+- Kho nguồn
+- Kho đích
+- Hàng hóa
+- Số lượng
+- Ghi chú
+
+Khi xác nhận:
+- Kho nguồn giảm số lượng.
+- Kho đích tăng số lượng.
+- Không được chuyển vượt số lượng đang tồn.
+- Kho nguồn và kho đích phải khác nhau.
+
+
+NGHIỆP VỤ TỒN KHO
+
+Tồn kho được tính theo từng:
+- Kho
+- Hàng hóa
+
+Số lượng tồn kho không được nhỏ hơn 0.
+
+Hàng hóa được cảnh báo sắp hết khi:
+Số lượng tồn nhỏ hơn hoặc bằng mức tồn tối thiểu.
+
+
+NGHIỆP VỤ LÔ HÀNG
+
+Lô hàng gồm:
+- Mã lô
+- Hàng hóa
+- Kho
+- Số lượng
+- Ngày nhập
+- Hạn sử dụng
+
+Hệ thống có thể cảnh báo:
+- Lô đã hết hạn.
+- Lô sắp hết hạn.
+
+
+TRỢ LÝ AI
+
+AI có nhiệm vụ:
+- Đọc dữ liệu
+- Phân tích
+- Tổng hợp
+- Giải thích
+- Đưa ra khuyến nghị
+
+AI không được tự ý:
+- Nhập hàng
+- Xuất hàng
+- Xác nhận phiếu
+- Thay đổi tồn kho
+- Xóa dữ liệu

@@ -1,0 +1,113 @@
+HƯỚNG DẪN SỬ DỤNG KHOAI
+
+
+ĐĂNG NHẬP
+
+Người dùng chọn vai trò:
+- Admin
+- Thủ kho
+- Kế toán
+
+Sau đó nhập email và mật khẩu.
+
+
+THÊM HÀNG HÓA
+
+Vào chức năng Hàng hóa.
+Chọn Thêm hàng.
+Nhập:
+- Mã hàng
+- Tên hàng
+- Danh mục
+- Đơn vị tính
+- Giá nhập
+- Giá bán
+- Tồn tối thiểu
+- Mã vạch
+- Mô tả
+
+Sau đó lưu hàng hóa.
+
+
+TẠO PHIẾU NHẬP
+
+Vào Nhập / Xuất.
+Chọn loại Nhập.
+Chọn:
+- Kho
+- Hàng hóa
+- Nhà cung cấp
+- Số lượng
+- Giá
+- Ghi chú
+
+Sau đó tạo phiếu.
+
+Phiếu mới có trạng thái Chờ xác nhận.
+
+Khi xác nhận phiếu:
+Tồn kho mới tăng.
+
+
+TẠO PHIẾU XUẤT
+
+Vào Nhập / Xuất.
+Chọn loại Xuất.
+Chọn:
+- Kho
+- Hàng hóa
+- Số lượng
+- Giá
+- Ghi chú
+
+Khi xác nhận:
+Hệ thống kiểm tra tồn kho.
+
+Nếu đủ hàng:
+Tồn kho giảm.
+
+Nếu không đủ hàng:
+Hệ thống từ chối.
+
+
+CHUYỂN KHO
+
+Vào Chuyển kho.
+Chọn:
+- Kho nguồn
+- Kho đích
+- Hàng hóa
+- Số lượng
+
+Khi xác nhận:
+- Kho nguồn giảm tồn
+- Kho đích tăng tồn
+
+
+XEM TỒN KHO
+
+Vào chức năng Tồn kho.
+
+Có thể xem:
+- Kho
+- Mã hàng
+- Tên hàng
+- Số lượng tồn
+- Tồn tối thiểu
+- Giá trị tồn
+
+
+SỬ DỤNG AI
+
+Vào AI dự báo.
+
+Có thể hỏi:
+- Tồn kho
+- Hàng sắp hết
+- Phiếu đang chờ
+- Báo cáo
+- Nhà cung cấp
+- Lô hàng
+- Chuyển kho
+- Quyền của người dùng
+- C01 đến C09

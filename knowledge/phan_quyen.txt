@@ -1,0 +1,63 @@
+PHÂN QUYỀN HỆ THỐNG KHOAI
+
+
+ADMIN
+
+Admin có quyền quản lý toàn bộ hệ thống.
+
+Admin có thể:
+- Xem tổng quan
+- Quản lý hàng hóa
+- Quản lý danh mục
+- Quản lý kho
+- Quản lý nhà cung cấp
+- Quản lý nhập xuất
+- Xác nhận phiếu nhập xuất
+- Quản lý chuyển kho
+- Quản lý lô hàng
+- Xem tồn kho
+- Xem cảnh báo
+- Xem báo cáo
+- Sử dụng AI
+- Cấp mật khẩu cho Thủ kho và Kế toán
+- Xem nhật ký hệ thống
+
+
+THỦ KHO
+
+Thủ kho phụ trách một kho cụ thể.
+
+Thủ kho có thể:
+- Xem tổng quan kho mình
+- Xem và thêm hàng hóa
+- Xem danh mục
+- Xem kho
+- Tạo phiếu nhập
+- Tạo phiếu xuất
+- Xác nhận phiếu thuộc kho mình
+- Chuyển kho
+- Theo dõi lô hàng
+- Xem tồn kho
+- Quét mã hàng
+- Xem cảnh báo
+- Sử dụng AI
+
+Thủ kho không được xác nhận phiếu của kho khác.
+
+
+KẾ TOÁN
+
+Kế toán chủ yếu theo dõi dữ liệu tài chính.
+
+Kế toán có thể:
+- Xem tổng quan
+- Xem hàng hóa
+- Xem danh mục
+- Xem kho
+- Xem nhà cung cấp
+- Xem giao dịch nhập xuất
+- Xem báo cáo
+- Sử dụng AI
+
+Kế toán không trực tiếp làm thay đổi tồn kho.
+Kế toán không xác nhận phiếu nhập xuất.

@@ -1,0 +1,61 @@
+RÀNG BUỘC C01 ĐẾN C09
+
+
+C01
+Số lượng tồn kho không được âm.
+
+
+C02
+Tồn tối thiểu của hàng hóa không được âm.
+
+
+C03
+Số lượng trong phiếu nhập hoặc xuất phải lớn hơn 0.
+
+
+C04
+Các mã quan trọng phải duy nhất.
+
+Ví dụ:
+- Mã hàng
+- Mã nhà cung cấp
+- Tên đăng nhập
+
+
+C05
+Các bảng liên quan phải sử dụng khóa ngoại.
+
+
+C06
+Chỉ giao dịch có trạng thái Đã xác nhận mới được làm thay đổi tồn kho.
+
+
+C07
+Khi xác nhận nhập hoặc xuất phải dùng transaction.
+
+Quy trình:
+- Bắt đầu transaction
+- Đọc tồn kho
+- Kiểm tra điều kiện
+- Cập nhật tồn kho
+- Cập nhật trạng thái phiếu
+- Ghi nhật ký
+- Commit
+
+Nếu xảy ra lỗi:
+- Rollback
+
+
+C08
+Không được xuất số lượng lớn hơn số lượng tồn hiện tại.
+
+
+C09
+Hệ thống phải ghi nhật ký thao tác.
+
+Nhật ký gồm:
+- Người thực hiện
+- Thời gian
+- Hành động
+- Đối tượng
+- Nội dung chi tiết

@@ -1,0 +1,122 @@
+CÂU HỎI THƯỜNG GẶP
+
+
+HÀNG HÓA
+
+Có bao nhiêu hàng hóa?
+Danh sách hàng hóa?
+SP001 là sản phẩm gì?
+SP003 là sản phẩm gì?
+Giá SP001 bao nhiêu?
+Giá nhập SP003?
+Giá bán SP003?
+Mã vạch SP001 là gì?
+SP003 thuộc danh mục nào?
+Có sản phẩm Acer không?
+Có SSD không?
+
+
+TỒN KHO
+
+SP001 còn bao nhiêu?
+SP003 còn bao nhiêu?
+SP001 còn hàng không?
+SSD còn hàng không?
+SP003 ở kho nào?
+Hàng nào sắp hết?
+Hàng nào hết hàng?
+Hàng nào dưới tồn tối thiểu?
+Tổng tồn kho?
+Kho KHO01 có những gì?
+Kho tôi có những gì?
+Sản phẩm nào tồn nhiều nhất?
+Sản phẩm nào tồn ít nhất?
+
+
+NHẬP XUẤT
+
+Có bao nhiêu phiếu nhập?
+Có bao nhiêu phiếu xuất?
+Phiếu nào đang chờ?
+Phiếu nhập nào đã xác nhận?
+Phiếu xuất nào đã xác nhận?
+Hôm nay nhập gì?
+Hôm nay xuất gì?
+SP003 đã xuất bao nhiêu?
+SP001 nhập gần nhất khi nào?
+Tổng giá trị nhập?
+Tổng giá trị xuất?
+
+
+CHUYỂN KHO
+
+Có phiếu chuyển kho nào?
+Phiếu chuyển nào đang chờ?
+SP001 đã từng chuyển kho chưa?
+Có thể chuyển hàng từ KHO01 sang KHO02 không?
+
+
+LÔ HÀNG
+
+Có những lô hàng nào?
+Lô nào sắp hết hạn?
+Lô nào đã hết hạn?
+SP003 thuộc lô nào?
+Lô hàng nào mới nhất?
+
+
+NHÀ CUNG CẤP
+
+Có bao nhiêu nhà cung cấp?
+NCC01 là ai?
+NCC02 là ai?
+Thông tin Acer Việt Nam?
+Nhà cung cấp nào có giá trị nhập lớn nhất?
+
+
+BÁO CÁO
+
+Lập báo cáo nhập xuất tồn.
+Báo cáo tháng này.
+Tổng giá trị tồn kho?
+So sánh nhập và xuất.
+Tình hình kho hiện tại?
+Tóm tắt hoạt động kho.
+
+
+AI
+
+Hàng nào cần nhập thêm?
+Nên nhập SP003 bao nhiêu?
+Hàng nào có nguy cơ hết?
+Có bất thường nào không?
+Hàng nào tồn lâu?
+Hàng nào xuất nhiều?
+Phân tích tình hình kho.
+Đưa ra khuyến nghị nhập hàng.
+
+
+PHÂN QUYỀN
+
+Admin làm được gì?
+Thủ kho làm được gì?
+Kế toán làm được gì?
+Tôi có quyền gì?
+Kế toán có được xác nhận phiếu không?
+Thủ kho có được xác nhận phiếu kho khác không?
+
+
+C01 ĐẾN C09
+
+C01 là gì?
+C02 là gì?
+C03 là gì?
+C04 là gì?
+C05 là gì?
+C06 là gì?
+C07 là gì?
+C08 là gì?
+C09 là gì?
+Giải thích C01 đến C09.
+Tại sao phiếu chờ chưa làm thay đổi tồn?
+Tại sao không được xuất vượt tồn?
